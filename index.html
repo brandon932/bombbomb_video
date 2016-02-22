@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Untitled</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-  </head>
-  <body>
-    
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    
-    <script type="text/javascript" src="js/main.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Untitled</title>
+
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+
+  <h1>Test video Controlls</h1>
+
+  <div class="video-container">
+    <video id="myvideo" src="http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4" >
+    </video>
+
+  <div class="video-controls">
+    <button id="play" type="button" name="button">play</button>
+    <button id="replay" type="button" name="button">replay</button>
+    <input  id="seek-bar" type="range" value="0">
+    <button id="mute" type="button" >Mute</button>
+    <input id="volume-bar" type="range" min="0" max="1" step="0.1" value="1">
+  </div>
+</div>
+
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
 </html>
