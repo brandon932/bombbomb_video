@@ -29,7 +29,7 @@ $(document).on('ready', function() {
   });
 
   $('#myvideo').on("timeupdate", function(e){
-     $('#vidTime').html(Math.floor(video.currentTime));
+    $('#vidTime').html(Math.floor(video.currentTime));
     var position = (100/ video.duration)* video.currentTime;
     $('#seek-bar').val(position);
     if (video.duration === video.currentTime){
@@ -62,24 +62,37 @@ $(document).on('ready', function() {
   });
   $("#edit").on("click", function(e){
     e.preventDefault();
-  $('#annotationForm').show();
+    $('#annotationForm').show();
   });
+
+var annotations = [];
 
   $("#add").on("click", function(e){
     e.preventDefault();
     var text = $("#text").val();
     var start = $("#start").val();
-    var end = $("#end").val();
-    console.log(text, start, end);
-  track.addCue(new VTTCue(start, end, text));
-  });
+    var stop = $("#stop").val();
+    // console.log(text, start, end);
+  annotations.push(track.addCue(new VTTCue(start, stop, text)));
+    // annotations.push({'start':start, 'end':end, 'text':text});
+    // updateTrack();
 
-  // video.addEventListener("loadedmetadata", function() {
-     track = video.addTextTrack("captions", "English", "en");
-     console.log(track);
-  // });
+  });
+  track = video.addTextTrack("captions", "English", "en");
+  console.log(track);
   track.mode = "showing";
+  annotations.push(track.addCue(new VTTCue(0, 3, "[Test]")));
+  annotations.push(track.addCue(new VTTCue(13, 18, "puddles!")));
+  annotations.push(track.addCue(new VTTCue(18, 20, "bye dodge")));
+  annotations.push(track.addCue(new VTTCue(25,30, "splash splash splash")));
+  annotations.push(track.addCue(new VTTCue(55,60, "ok lets go now. ")));
+
   // track.addCue(new VTTCue(0, 12, "[Test]"));
+  // var updateTrack = function(){
+  //   for (var i = 0; i < annotations.length; i++) {
+  //     track.addCue(new VTTCue(annotations[i][start],annotations[i][stop],annotations[i][text]));
+  //   }
+  // };
 
 
 });
