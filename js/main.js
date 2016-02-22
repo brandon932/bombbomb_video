@@ -1,8 +1,9 @@
 // add scripts
 $(document).on('ready', function() {
   $('#replay').hide();
+  $('#annotationForm').hide();
   $('#myvideo').load();
-  var video = document.getElementById("myvideo");
+  var video = document.getElementById("myvideo"), track;
   video.load();
 
   $('#play').on("click", function(e){
@@ -28,8 +29,9 @@ $(document).on('ready', function() {
   });
 
   $('#myvideo').on("timeupdate", function(e){
-    var time = (100/ video.duration)* video.currentTime;
-    $('#seek-bar').val(time);
+     $('#vidTime').html(Math.floor(video.currentTime));
+    var position = (100/ video.duration)* video.currentTime;
+    $('#seek-bar').val(position);
     if (video.duration === video.currentTime){
       $('#replay').show();
     }else{
@@ -58,6 +60,26 @@ $(document).on('ready', function() {
       $("#mute").html("un-mute");
     }
   });
+  $("#edit").on("click", function(e){
+    e.preventDefault();
+  $('#annotationForm').show();
+  });
+
+  $("#add").on("click", function(e){
+    e.preventDefault();
+    var text = $("#text").val();
+    var start = $("#start").val();
+    var end = $("#end").val();
+    console.log(text, start, end);
+  track.addCue(new VTTCue(start, end, text));
+  });
+
+  // video.addEventListener("loadedmetadata", function() {
+     track = video.addTextTrack("captions", "English", "en");
+     console.log(track);
+  // });
+  track.mode = "showing";
+  // track.addCue(new VTTCue(0, 12, "[Test]"));
 
 
 });
